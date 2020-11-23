@@ -3,6 +3,8 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import jwtConfig from '../config/auth';
 
+import AppError from '../errors/AppError';
+
 import User from '../models/User';
 
 interface Request {
@@ -21,13 +23,13 @@ class AuthenticateUserService {
     const user = await usersRepository.findOne({ where: { email } });
 
     if (!user) {
-      throw new Error('Combinação errada de e-mail ou senha');
+      throw new AppError('Combinação errada de e-mail ou senha', 401);
     }
 
     const passwordMatched = await compare(password, user.password);
 
     if (!passwordMatched) {
-      throw new Error('Combinação errada de e-mail ou senha');
+      throw new AppError('Combinação errada de e-mail ou senha', 401);
     }
 
     const { secret, expiresIn } = jwtConfig.jwt;
