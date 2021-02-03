@@ -12,7 +12,6 @@ class AppointmentsRepository implements IAppointmentsRepository {
   }
 
   /**
-   *
    * Procurando por data
    */
 
@@ -24,7 +23,6 @@ class AppointmentsRepository implements IAppointmentsRepository {
   }
 
   /**
-   *
    * Criando um registro
    */
 
